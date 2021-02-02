@@ -55,6 +55,16 @@
 					"type":"boolean"
 				}
 			]
+		},
+		"onClose": 
+	   	{
+	    	"parameters":
+	    	[		    	
+				{
+					"name":"onClose",
+					"type":"function"
+				}
+			]
 		}
  	}
 }

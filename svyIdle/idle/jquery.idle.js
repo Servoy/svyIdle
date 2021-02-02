@@ -38,6 +38,7 @@
         onActive: function () {}, //callback function to be executed after back from idleness
         onHide: function () {}, //callback function to be executed when window is hidden
         onShow: function () {}, //callback function to be executed when window is visible
+        onClose: function () {},//callback function to be executed when window is closed
         keepTracking: true, //set it to false if you want to track only the first time
         startAtIdle: false,
         recurIdleCall: false
@@ -94,6 +95,11 @@
               settings.onShow.call();
             }
           }
+        });
+      }
+      if (settings.onClose){
+        $(window).on('beforeunload', function(e){
+        settings.onClose.call();
         });
       }
     });
