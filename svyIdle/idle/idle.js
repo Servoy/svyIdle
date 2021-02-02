@@ -35,6 +35,19 @@ angular.module('svyIdle',['servoy'])
 				recurIdleCall: recurIdleCall,
 				idle: idle
 			})
+		},
+		/**
+		 * Setup trigger on closing NG Desktop window
+		 *
+		 * @param {function} onClose triggers when window is closed by user
+		 */
+		onClose: function(onClose) {
+			$(document).idle({
+				onClose: function() {
+					if(onClose)
+						$window.executeInlineScript(onClose.formname, onClose.script, []);
+				}
+			})
 		}
 
 	}
