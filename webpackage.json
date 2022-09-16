@@ -3,6 +3,7 @@
     "displayName": "Idle Web Service",
     "packageType": "Web-Service",
     "icon": "https://raw.githubusercontent.com/Servoy/svyIdle/master/icon.png",
+    "invertIcon": true,
     "description": "Simple web service to check if a user is idle or if browser window no longer active",
     "wikiUrl": "https://github.com/Servoy/svyIdle/wiki",
     "sourceUrl": "https://github.com/Servoy/svyIdle",
