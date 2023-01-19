@@ -20,6 +20,8 @@ angular.module('svyIdle',['servoy'])
 			
 			// TODO should unbind the previous function if already registered ?
 			
+			$(document).trigger('idle:stop')
+
 			$(document).idle({
 				onIdle: function() {
 					if (onIdle) {
