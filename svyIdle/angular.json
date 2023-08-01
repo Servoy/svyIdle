@@ -1,0 +1,57 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "c73821cc-c3cd-481c-a275-0657b4a6c943"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "@servoy/svyidle": {
+      "projectType": "library",
+      "root": "projects/svyidle",
+      "sourceRoot": "projects/svyidle/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/svyidle/tsconfig.lib.json",
+            "project": "projects/svyidle/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/svyidle/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "preserveSymlinks": true,
+            "main": "projects/svyidle/src/test.ts",
+            "tsConfig": "projects/svyidle/tsconfig.spec.json",
+            "karmaConfig": "projects/svyidle/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "preserveSymlinks": true,
+            "lintFilePatterns": [
+              "projects/svyidle/src/**/*.ts",
+              "projects/svyidle/src/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
+  }
+}

@@ -3,6 +3,12 @@
 	"displayName": "idle",
 	"version": 1,
  	"definition": "svyIdle/idle/idle.js",
+ 	"ng2Config": {
+       "packageName": "@servoy/svyidle",
+       "serviceName": "SvyIdleService",
+       "entryPoint": "dist/servoy/svyidle",
+       "moduleName": "SvyIdleModule"
+    },	
 	"libraries": [{
 			"name": "idle.js",
 			"version": "1.2.6",

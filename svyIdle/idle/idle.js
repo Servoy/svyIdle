@@ -71,6 +71,7 @@ angular.module('svyIdle',['servoy'])
 	var scope = $services.getServiceScope('svyIdle');
 
 	scope.$watch('model', function(newValue, oldValue) {
+		debugger;
 		if (newValue && !scope.idleInitialized) {
 			// bind the listener upon browser refresh
 			var model = scope.model;
