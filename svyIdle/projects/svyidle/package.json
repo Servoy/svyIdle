@@ -1,6 +1,6 @@
 {
     "name": "@servoy/svyidle",
-    "version": "2023.9.0",
+    "version": "2023.9.1",
     "peerDependencies": {
       "@angular/animations": "^16",
       "@angular/cdk": "^16",
