@@ -4,6 +4,7 @@ var AdmZip = require('adm-zip');
 var zip = new AdmZip();
 
 zip.addLocalFolder("./META-INF/", "/META-INF/");
+zip.addLocalFolder("./idle/", "/idle/");
 zip.addLocalFolder("./dist/servoy/svyidle/", "/dist/servoy/svyidle/");
 
 zip.writeZip("svyidle.zip");
