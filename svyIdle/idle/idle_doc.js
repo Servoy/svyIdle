@@ -13,4 +13,4 @@
  * @param {Boolean} startAtIdle if you want to start at idle, set to true
  * @param {Boolean} recurIdleCall use setInterval versus timeout, by default uses setTimeout
  */
-onIdle: function(onIdle, onActive, onHide, onShow, events, idle, keepTracking, startAtIdle, recurIdleCall) { }
+function onIdle(onIdle, onActive, onHide, onShow, events, idle, keepTracking, startAtIdle, recurIdleCall) { }
