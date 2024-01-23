@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: svyIdle
-Bundle-Name: Idle Service
+Bundle-Name: Idle Web Service
 Bundle-Version: 2023.9.1
 Package-Type: Web-Service
 
