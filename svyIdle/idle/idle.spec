@@ -3,6 +3,7 @@
 	"displayName": "Idle",
 	"version": 1,
  	"definition": "svyIdle/idle/idle.js",
+    "doc": "svyIdle/idle/idle_doc.js",
  	"ng2Config": {
        "packageName": "@servoy/svyidle",
        "serviceName": "SvyIdleService",
