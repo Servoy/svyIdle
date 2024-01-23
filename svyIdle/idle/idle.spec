@@ -1,6 +1,6 @@
 {
 	"name": "svy-idle",
-	"displayName": "idle",
+	"displayName": "Idle",
 	"version": 1,
  	"definition": "svyIdle/idle/idle.js",
  	"ng2Config": {
