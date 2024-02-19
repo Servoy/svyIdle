@@ -33,22 +33,22 @@ export class SvyIdleService implements OnDestroy {
         this.stop();
         this.onIdleCallback = () => {
             if (onIdle) {
-                this.servoyService.executeInlineScript(onIdle.formname, onIdle.script, []);
+                onIdle();
             }            
         };
         this.onActiveCallback = () => {
             if (onActive) {
-                this.servoyService.executeInlineScript(onActive.formname, onActive.script, []);
+                onActive();
             }            
         };
         this.onHideCallback = () => {
             if (onHide) {
-                this.servoyService.executeInlineScript(onHide.formname, onHide.script, []);
+                onHide();
             }            
         };
         this.onShowCallback = () => {
             if (onShow) {
-                this.servoyService.executeInlineScript(onShow.formname, onShow.script, []);
+                onShow();
             }            
         };
         this.events = (events == null) || (events.length == 0) || (events == ' ') ? DEFAULT_IDLE_TRIGGER_EVENTS : events;
