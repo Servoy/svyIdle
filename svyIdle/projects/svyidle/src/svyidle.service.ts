@@ -76,7 +76,7 @@ export class SvyIdleService implements OnDestroy {
     }
     
     // events
-    get internaEvents(): string {
+    get internalEvents(): string {
         return this.events;
     }
 
@@ -94,29 +94,29 @@ export class SvyIdleService implements OnDestroy {
     }
     
     // keepTracking
-    get internaKeepTracking(): boolean {
+    get internalKeepTracking(): boolean {
         return this.keepTracking;
     }
 
-    set internaKeepTracking(arg: boolean) {
+    set internalKeepTracking(arg: boolean) {
         this.keepTracking = arg;
     }
     
     // startAtIdle
-    get internaStartAtIdle(): boolean {
+    get internalStartAtIdle(): boolean {
         return this.startAtIdle;
     }
 
-    set internaStartAtIdle(arg: boolean) {
+    set internalStartAtIdle(arg: boolean) {
         this.startAtIdle = arg;
     }
     
     // keepTracking
-    get internaRecurIdleCall(): boolean {
+    get internalRecurIdleCall(): boolean {
         return this.recurIdleCall;
     }
 
-    set internaRecurIdleCall(arg: boolean) {
+    set internalRecurIdleCall(arg: boolean) {
         this.recurIdleCall = arg;
     }
 
@@ -138,7 +138,7 @@ export class SvyIdleService implements OnDestroy {
         this.recurIdleCall = recurIdleCall == null ? false : recurIdleCall;
         
         // always re-initialize upon onIdle
-        this.onIdleSetup();
+        this.onIdleSetup(this.keepTracking);
         
         // persist the params in internal model
         this.servoyService.sendServiceChanges('svyIdle', 'internalOnIdle', this._onIdle);
@@ -152,12 +152,14 @@ export class SvyIdleService implements OnDestroy {
         this.servoyService.sendServiceChanges('svyIdle', 'internalRecurIdleCall', this.recurIdleCall);
     }
     
-    // TODO can i use the this. instead of all thes params ?
-    private onIdleSetup() {
+    private onIdleSetup(keepTracking: boolean) {
 		// flag the onIdle as initialized
 		this._initialized = true;
 
 		this.stop();
+		// stop reset keepTracking to false, here is reset back
+		this.keepTracking = keepTracking;
+		
 		this.onIdleCallback = () => {
 			if (this._onIdle) {
 				 this._onIdle();
@@ -220,7 +222,7 @@ export class SvyIdleService implements OnDestroy {
 				this._initializing = true;
 				setTimeout(() => {
 					// setup only has not been initialized already
-					if (!this._initialized) this.onIdleSetup();
+					if (!this._initialized) this.onIdleSetup(this.keepTracking);
 				})
 			}
 		}
@@ -236,6 +238,7 @@ export class SvyIdleService implements OnDestroy {
                 this.doc.removeEventListener(eventToListen, this.eventToListenCallback);
             }
         }
+        // Why is this keepTracking set to false here ?
         this.keepTracking = false;
         this.resetTimeout(this.lastId);
     }
