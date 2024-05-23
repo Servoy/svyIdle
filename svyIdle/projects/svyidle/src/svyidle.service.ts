@@ -152,6 +152,7 @@ export class SvyIdleService implements OnDestroy {
         this.servoyService.sendServiceChanges('svyIdle', 'internalRecurIdleCall', this.recurIdleCall);
     }
     
+    // TODO can i use the this. instead of all thes params ?
     private onIdleSetup(keepTracking: boolean) {
 		// flag the onIdle as initialized
 		this._initialized = true;
@@ -187,7 +188,7 @@ export class SvyIdleService implements OnDestroy {
 		this.lastId = this.timeout();
 				
 		this.eventToListenCallback = () => {
-			this.lastId = this.resetTimeout(this.lastId);
+			this.lastId = this.resetTimeout(this.lastId, true);
 		};
 		const eventsToListen = this.events.split(' ');
 		for (const eventToListen of eventsToListen) {
@@ -240,12 +241,15 @@ export class SvyIdleService implements OnDestroy {
         }
         // Why is this keepTracking set to false here ?
         this.keepTracking = false;
-        this.resetTimeout(this.lastId);
+        this.resetTimeout(this.lastId, false);
     }
 
-    private resetTimeout(id: any): any {
+    private resetTimeout(id: any, isActive: boolean): any {
         if(this.isIdle) {
-            this.onActiveCallback();
+			if (isActive) {
+				// should execut onActiveCallback only on user interaction ( upon eventToListenCallback ), not if onIdle is reset;
+				this.onActiveCallback();
+			}
             this.isIdle = false;
         }
         clearTimeout(id);
