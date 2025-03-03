@@ -1,25 +1,5 @@
 /* A simple web service for checking if a user is idle or if the browser window is no longer active. */
 
-var internalOnIdle;
-
-var internalOnActive;
-
-var internalOnHide;
-
-var internalOnShow;
-
-var internalEvents;
-
-var internalIdle;
-
-var internalKeepTracking;
-
-var internalStartAtIdle;
-
-var internalRecurIdleCall;
-
-
-
 /**
  * Setup Idle options and callbacks
  *
