@@ -1,5 +1,5 @@
-import { Injectable, Inject, OnDestroy } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Injectable, inject, OnDestroy, DOCUMENT } from '@angular/core';
+
 import { ServoyPublicService } from '@servoy/public';
 
 type CallableFunction = (...args: unknown[]) => void;
@@ -10,33 +10,33 @@ const DEFAULT_IDLE_TIME = 60000;
 @Injectable()
 export class SvyIdleService implements OnDestroy {
 	
-	private _onIdle: CallableFunction;
-	private _onActive: CallableFunction;
-	private _onHide: CallableFunction;
-	private _onShow: CallableFunction;
+	private _onIdle: CallableFunction | undefined;
+	private _onActive: CallableFunction | undefined;
+	private _onHide: CallableFunction | undefined;
+	private _onShow: CallableFunction | undefined;
 	
-	idle: number //idle time in ms
-    events: string; //events that will trigger the idle resetter
-    onIdleCallback: Function; //callback function to be executed after idle time
-    onActiveCallback: Function; //callback function to be executed after back from idleness
-    onHideCallback: Function; //callback function to be executed when window is hidden
-    onShowCallback: Function; //callback function to be executed when window is visible
-    keepTracking: boolean; //set it to false if you want to track only the first time
-    startAtIdle: boolean;
-    recurIdleCall: boolean;
+	idle!: number;
+    events!: string;
+    onIdleCallback!: CallableFunction;
+    onActiveCallback!: CallableFunction;
+    onHideCallback!: CallableFunction;
+    onShowCallback!: CallableFunction;
+    keepTracking!: boolean;
+    startAtIdle!: boolean;
+    recurIdleCall!: boolean;
 
-    isIdle: boolean;
-    isVisible: boolean;
+    isIdle!: boolean;
+    isVisible!: boolean;
     lastId: any;
 
     eventToListenCallback: any;
     visibilityChangeCallback: any;
     
-    private _initialized: boolean;
-    private _initializing: boolean;
+    private _initialized = false;
+    private _initializing = false;
 		
 	// getter & setter for internal model properties
-    get internalOnIdle(): CallableFunction {
+    get internalOnIdle(): CallableFunction | undefined {
         return this._onIdle;
     }
 
@@ -46,7 +46,7 @@ export class SvyIdleService implements OnDestroy {
     }
     
     // onActive
-    get internalOnActive(): CallableFunction {
+    get internalOnActive(): CallableFunction | undefined {
         return this._onActive;
     }
 
@@ -56,7 +56,7 @@ export class SvyIdleService implements OnDestroy {
     }
     
     // onHide
-    get internalOnHide(): CallableFunction {
+    get internalOnHide(): CallableFunction | undefined {
         return this._onHide;
     }
 
@@ -66,7 +66,7 @@ export class SvyIdleService implements OnDestroy {
     }
     
     // onShow
-    get internalOnShow(): CallableFunction {
+    get internalOnShow(): CallableFunction | undefined {
         return this._onShow;
     }
 
@@ -120,7 +120,10 @@ export class SvyIdleService implements OnDestroy {
         this.recurIdleCall = arg;
     }
 
-    constructor(private servoyService: ServoyPublicService, @Inject(DOCUMENT) private doc: Document) {
+    private readonly servoyService = inject(ServoyPublicService);
+    private readonly doc = inject(DOCUMENT);
+
+    constructor() {
 		// constructor
     }
 
